@@ -26,10 +26,10 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
+server.listen(port, connectDatabase);
 server.on("error", onError);
 server.on("listening", onListening);
 
-server.listen(connectDatabase);
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -87,12 +87,11 @@ function onListening() {
 }
 
 function connectDatabase() {
-  mongoose
-    .connect(
-      "mongodb://server:server1@ds129281.mlab.com:29281/comment-server",
-      { useUnifiedTopology: true, useNewUrlParser: true }
-    )
-    .then(() => {
-      debug("connected to mongo data store");
-    });
+  mongoose.connect(
+    "mongodb://server:server1@ds129281.mlab.com:29281/comment-server",
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    }
+  );
 }

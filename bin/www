@@ -7,6 +7,7 @@
 var app = require("../app");
 var debug = require("debug")("comment-server:server");
 var http = require("http");
+var mongoose = require("mongoose");
 
 /**
  * Get port from environment and store in Express.
@@ -25,10 +26,10 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 
+server.listen(connectDatabase);
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -83,4 +84,15 @@ function onListening() {
   var addr = server.address();
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
+}
+
+function connectDatabase() {
+  mongoose
+    .connect(
+      "mongodb://server:server1@ds129281.mlab.com:29281/comment-server",
+      { useUnifiedTopology: true, useNewUrlParser: true }
+    )
+    .then(() => {
+      debug("connected to mongo data store");
+    });
 }

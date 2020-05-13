@@ -15,5 +15,8 @@ app.use(cookieParser());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("*", (req, res) =>
+  res.status(404).send({ error: "Route Note Found", statusCode: 404 })
+);
 
 module.exports = app;

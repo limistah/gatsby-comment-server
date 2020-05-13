@@ -6,8 +6,7 @@ var { Comment, validate } = commentModel;
 /* GET comment listings. */
 router.get("/", async function (req, res, next) {
   let { page, limit, website, slug } = req.query;
-  page = Number.parseInt(page);
-  page = (page && page + 1) || 1;
+  page = (page && Number.parseInt(page)) || 1;
   limit = limit || 10;
 
   const query = {};

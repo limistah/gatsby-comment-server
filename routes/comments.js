@@ -22,7 +22,9 @@ router.get("/", async function (req, res, next) {
     .limit(limit)
     .skip(limit * page);
 
-  return res.status(200).json({ data: comments, page, limit, website, slug });
+  const total = await Comment.find(query).countDocuments();
+
+  return res.status(200).json({ data: comments, page, limit, total });
 });
 
 /* GET comment listings. */

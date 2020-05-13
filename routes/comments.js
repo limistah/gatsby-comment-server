@@ -7,7 +7,7 @@ var { Comment, validate } = commentModel;
 router.get("/", async function (req, res, next) {
   let { page, limit, website, slug } = req.query;
 
-  page = (page && page + 1) || page;
+  page = (page && page + 1) || 1;
   limit = limit || 10;
 
   const query = {};
@@ -28,8 +28,6 @@ router.get("/", async function (req, res, next) {
 /* GET comment listings. */
 router.post("/", async function (req, res, next) {
   var comment = req.body;
-
-  console.log("Here");
 
   const { error } = validate(comment);
   if (error) {

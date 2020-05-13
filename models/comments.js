@@ -22,7 +22,7 @@ const Comment = mongoose.model("Comment", commentSchema);
 function validateComment(comment) {
   const schema = {
     name: Joi.string(),
-    email: Joi.email(),
+    email: Joi.string().email(),
     slug: Joi.string(),
     website: Joi.string().uri().required(),
     content: Joi.string().required(),

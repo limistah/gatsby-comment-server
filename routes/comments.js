@@ -26,7 +26,7 @@ router.get("/", async function (req, res, next) {
 /* GET comment listings. */
 router.post("/", async function (req, res, next) {
   var comment = req.body;
-
+  console.log(comment);
   const { error } = validate(comment);
   if (error) {
     return res.status(400).json({

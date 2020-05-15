@@ -9,10 +9,7 @@ router.get("/", async function (req, res, next) {
   page = (page && Number.parseInt(page)) || 0;
   limit = parseInt(limit) || 10;
 
-  const query = {};
-  if (website) {
-    query.website = website;
-  }
+  const query = { website };
   if (slug) {
     query.slug = slug;
   }
